@@ -25,6 +25,19 @@ num_girl_friends 4
           <div id="output"></div>
         </div>
       </div>
+      <div>
+        <h2 id="h2">Useful Explanation:</h2>
+        <div class="video-container">
+          <iframe
+            src="https://www.loom.com/embed/b2e7395dff5743759c63e54c078f750c?sid=14945293-c2a7-4505-83f5-9ecd7f60a5e9"
+            frameborder="0"
+            webkitallowfullscreen
+            mozallowfullscreen
+            allowfullscreen
+            style="width: 100%; height: 100%"
+          ></iframe>
+        </div>
+      </div>
     </main>
 
     <script>
@@ -45,11 +58,13 @@ num_girl_friends 4
         // Split the content by newlines to get each line
         let lines = content.split("\n");
         let hashMap = {};
-
+        // console.log(lines);
         lines.forEach((line) => {
           // Split by whitespace, but limit the split to 2 parts (key and value)
           let [key, ...valueParts] = line.trim().split(/\s+/, 2); // Limit split to 2 parts
+
           let value = valueParts.join(" ");
+          console.log(value);
 
           if (key && value) {
             let numericValue = parseFloat(value);
@@ -63,10 +78,10 @@ num_girl_friends 4
     <style>
       html,
       body {
-        height: 100%;
+        height: 110%;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
 
       body {
@@ -90,7 +105,7 @@ num_girl_friends 4
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 50px;
+        margin: 40px;
         gap: 15px;
       }
       h1 {
@@ -154,6 +169,67 @@ num_girl_friends 4
         background: rgba(222, 235, 255, 0.057);
         line-height: 40px;
         margin-bottom: 5px;
+      }
+
+      #h2 {
+        color: #f8f8f2;
+        margin-bottom: 50px;
+      }
+      .video-container {
+        width: 34em;
+        height: 34em;
+      }
+
+      @media (max-width: 768px) {
+        main {
+          padding-top: 10%;
+        }
+
+        #boxes {
+          flex-direction: column;
+          margin: 20px;
+        }
+
+        #input,
+        #output {
+          width: 250px;
+          height: 200px;
+        }
+        .video-container {
+          width: 90vw;
+          height: 90vw;
+          max-width: 34em;
+          max-height: 34em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #input,
+        #output {
+          width: 200px;
+          height: 150px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        #inputText,
+        #outputText {
+          font-size: 14px;
+        }
+
+        #input {
+          font-size: 12px;
+        }
+
+        #output {
+          font-size: 12px;
+        }
+        .video-container {
+          width: 90vw;
+          height: 56.25vw; /* 16:9 aspect ratio */
+        }
       }
     </style>
   </body>
