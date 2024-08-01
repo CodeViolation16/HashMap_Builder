@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <h1>Python HashMap Parser</h1>
+
+      <div id="boxes">
+        <div id="inputSection">
+          <div id="inputText">Paste Your String Here</div>
+          <textarea
+            id="input"
+            placeholder="example: first_name khanh
+last_name nguyen
+num_girl_friends 4
+"
+          ></textarea>
+        </div>
+        <div id="outputSection">
+          <div id="outputText">Your Result Will Be Shown Here</div>
+          <div id="output"></div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const input = document.querySelector("#input");
+      const output = document.querySelector("#output");
+      const outputPlaceholder =
+        '{ "first_name": "Khanh", "last_name": "Nguyen", "num_girl_friends": 4 }';
+      output.textContent = outputPlaceholder;
+
+      input.addEventListener("input", function () {
+        let content = input.value.trim();
+
+        if (!content) {
+          output.textContent = outputPlaceholder;
+          return;
+        }
+
+        // Split the content by newlines to get each line
+        let lines = content.split("\n");
+        let hashMap = {};
+
+        lines.forEach((line) => {
+          // Split by whitespace, but limit the split to 2 parts (key and value)
+          let [key, ...valueParts] = line.trim().split(/\s+/, 2); // Limit split to 2 parts
+          let value = valueParts.join(" ");
+
+          if (key && value) {
+            let numericValue = parseFloat(value);
+            hashMap[key] = isNaN(numericValue) ? value : numericValue;
+          }
+        });
+
+        output.textContent = JSON.stringify(hashMap, null, 2);
+      });
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #141724;
+        font-family: Arial, sans-serif;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding-top: 5%;
+      }
+
+      #boxes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px;
+        gap: 15px;
+      }
+      h1 {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #f8f8f2;
+      }
+
+      #inputText {
+        text-align: center;
+        height: 40px;
+        color: #f8f8f2;
+        background: rgba(222, 235, 255, 0.057);
+      }
+      #outputText {
+        color: #f8f8f2;
+        text-align: center;
+        height: 40px;
+        background: rgba(222, 235, 255, 0.057);
+      }
+      #input,
+      #output {
+        width: 300px;
+        height: 300px;
+        color: #f8f8f2;
+        border: 1px solid rgba(252, 252, 252, 0.08);
+        padding: 5px;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5;
+        display: block;
+      }
+
+      #input {
+        background: rgba(9, 11, 15, 0.04);
+        resize: none;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        color: #f8f8f2;
+      }
+
+      #output {
+        background: rgba(110, 116, 124, 0.057);
+        overflow-y: auto;
+        /* white-space: pre-wrap; */
+        word-wrap: break-word;
+      }
+
+      #inputSection,
+      #outputSection {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #inputText,
+      #outputText {
+        text-align: center;
+        height: 40px;
+        color: #f8f8f2;
+        background: rgba(222, 235, 255, 0.057);
+        line-height: 40px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </body>
+</html>
